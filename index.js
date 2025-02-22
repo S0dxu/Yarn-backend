@@ -55,6 +55,6 @@ io.on('connection', (socket) => {
     /* console.log(users) */
 });
 
-server.listen(port, hostname, () => {
-    console.log(`http://${hostname}:${port}/`);
+server.listen(port, '0.0.0.0', () => {
+    console.log(`Server is running on port ${port}`);
 });
