@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
             const token = jwt.sign({ username }, KEY, { expiresIn: '1h' });
             socket.emit('success', token);
             users.push(username);
-            /* console.log(users); */
+            console.log(users);
         }
     });
 
@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
             const decoded = jwt.verify(token, KEY);
             io.emit('broadcastMessage', message, decoded.username, color, timestamp);
         } catch (err) {
-            socket.emit('errorMessage', 'Invalid token! Authentication failed.');
+            io.emit('errorMessage', 'Invalid token! Authentication failed.');
             socket.disconnect();
         }
     });
@@ -58,12 +58,12 @@ io.on('connection', (socket) => {
     socket.on('userGone', (username) => {
         /* console.log('userGone: ' + username); */
         users.splice(users.indexOf(username), 1);
-        /* console.log(users);
-        console.log("disconnected") */
+        console.log(users);
+        /* console.log("disconnected") */
     });
 
     socket.on('disconnect', () => {
-        /* console.log('disconnected: ' + socket.id); */
+        console.log('disconnected: ' + socket.id);
     });
     /* console.log(users) */
 });
